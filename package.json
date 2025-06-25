@@ -1,0 +1,14 @@
+{
+  "name": "ddcc-website",
+  "version": "1.0.0",
+  "description": "DDCC设计工作室暗黑星际风格官网",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": ["暗黑星际", "设计工作室", "网站"],
+  "author": "DDCC设计工作室",
+  "license": "MIT"
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们 - DDCC设计工作室</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="nebula"></div>
+    <header>
+        <h1>DDCC设计工作室</h1>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li class="dropdown">
+                    <a href="#services" class="dropdown-toggle">服务</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="services/brand.html">品牌设计</a></li>
+                        <li><a href="services/ui.html">UI/UX设计</a></li>
+                        <li><a href="services/3d.html">3D可视化</a></li>
+                        <li><a href="services/motion.html">动态设计</a></li>
+                    </ul>
+                </li>
+                <li><a href="works.html">作品展示</a></li>
+                <li><a href="about.html">关于我们</a></li>
+                <li class="dropdown">
+                    <a href="#insights" class="dropdown-toggle">行业洞察</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="insights/blog.html">设计博客</a></li>
+                        <li><a href="insights/case-studies.html">案例研究</a></li>
+                        <li><a href="insights/trends.html">设计趋势</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html" class="active">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="page-header">
+            <h2>联系我们</h2>
+            <p>开启您的星际设计之旅，与我们取得联系</p>
+        </section>
+        <section class="contact-content">
+            <div class="contact-info">
+                <h3>联系方式</h3>
+                <div class="info-item">
+                    <h4>邮箱</h4>
+                    <p>contact@ddcc-design.com</p>
+                </div>
+                <div class="info-item">
+                    <h4>电话</h4>
+                    <p>+86 123 4567 8910</p>
+                </div>
+                <div class="info-item">
+                    <h4>地址</h4>
+                    <p>上海市浦东新区张江高科技园区科苑路88号</p>
+                </div>
+                <div class="social-links">
+                    <h4>关注我们</h4>
+                    <div class="social-icons">
+                        <a href="#" class="icon">微博</a>
+                        <a href="#" class="icon">微信</a>
+                        <a href="#" class="icon">Behance</a>
+                        <a href="#" class="icon">Dribbble</a>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3>发送消息</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">您的姓名</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">电子邮箱</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">主题</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">请选择...</option>
+                            <option value="service">服务咨询</option>
+                            <option value="cooperation">商务合作</option>
+                            <option value="feedback">意见反馈</option>
+                            <option value="other">其他</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">您的留言</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">发送消息</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script src="main.js"></script>
+</body>
+</html>
