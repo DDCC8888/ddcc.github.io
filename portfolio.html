@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+    
+    :root {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      font-weight: 400;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0A0E17;
+      color: #E1E5EE;
+    }
+    
+    .font-abril {
+      font-family: 'Abril Fatface', cursive;
+    }
+    
+    .bg-primary {
+      background-color: #0A0E17;
+    }
+    
+    .bg-secondary {
+      background-color: #1A2035;
+    }
+    
+    .text-primary {
+      color: #E1E5EE;
+    }
+    
+    .text-accent {
+      color: #6C5CE7;
+    }
+    
+    .rounded-xl {
+      border-radius: 12px;
+    }
+    
+    .transition-all {
+      transition: all 0.3s ease;
+    }
+    
+    .hover\\:scale-110:hover {
+      transform: scale(1.1);
+    }
+    
+    .hover\\:bg-opacity-50:hover {
+      background-color: rgba(0,0,0,0.5);
+    }
+    
+    .group:hover .group-hover\\:opacity-100 {
+      opacity: 1;
+    }
+    
+    .absolute-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .z-50 {
+      z-index: 50;
+    }
+    
+    .shadow-lg {
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    }
+    
+    .hover\\:shadow-xl:hover {
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="relative min-h-screen overflow-x-hidden">
+    <canvas id="starryCanvas" class="fixed top-0 left-0 -z-10 h-full w-full"></canvas>
+    
+    <header class="relative z-10 p-6">
+      <h1 class="font-abril text-4xl text-primary">Design Portfolio</h1>
+    </header>
+
+    <main class="relative z-10">
+      <!-- Work Carousel -->
+      <div class="relative h-screen w-full overflow-hidden" id="workCarousel">
+        <!-- Carousel items will be added by JS -->
+      </div>
+      
+      <!-- Featured Works -->
+      <section class="min-h-screen bg-primary/90 py-20">
+        <div class="container mx-auto px-6">
+          <h2 class="mb-16 font-abril text-4xl text-primary text-center">Featured Works</h2>
+          
+          <div class="grid grid-cols-1 gap-16 md:grid-cols-3" id="featuredWorks">
+            <!-- Featured works will be added by JS -->
+          </div>
+        </div>
+      </section>
+      
+      <!-- All Works -->
+      <section class="min-h-screen bg-primary/90 py-20">
+        <div class="container mx-auto px-6">
+          <h2 class="mb-16 font-abril text-4xl text-primary text-center">All Works</h2>
+          
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-3" id="allWorks">
+            <!-- All works will be added by JS -->
+          </div>
+        </div>
+      </section>
+    </main>
+    
+    <!-- Contact Button -->
+    <button class="fixed bottom-6 right-6 z-50 rounded-full bg-accent p-4 text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl" id="contactButton">
+      <i class="fa-solid fa-envelope"></i>
+    </button>
+    
+    <!-- Contact Section -->
+    <div class="fixed bottom-0 left-0 right-0 z-40 bg-primary hidden" id="contactSection">
+      <div class="container mx-auto px-6 py-12">
+        <!-- Contact content will be added by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Starry Background
+    const canvas = document.getElementById('starryCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const stars = Array(200).fill().map(() => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 1.5,
+      vx: Math.random() * 0.2 - 0.1,
+      vy: Math.random() * 0.2 - 0.1
+    }));
+    
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0A0E17';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      stars.forEach(star => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#E1E5EE';
+        ctx.fill();
+        
+        star.x += star.vx;
+        star.y += star.vy;
+        
+        if (star.x < 0 || star.x > canvas.width) star.vx = -star.vx;
+        if (star.y < 0 || star.y > canvas.height) star.vy = -star.vy;
+      });
+      
+      requestAnimationFrame(drawStars);
+    }
+    drawStars();
+    
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+    
+    // Sample works data
+    const works = [
+      {
+        id: '1',
+        title: 'Minimalist Design',
+        imageUrl: 'https://space.coze.cn/api/coze_space/gen_image?image_size=landscape_16_9&prompt=Modern%20minimalist%20design%20work%2C%20clean%20white%20background%2C%20abstract%20shapes%2C%20professional%20photography&sign=2780584376c7ff71a5211bebd93af7be',
+        category: 'Brand Identity',
+        description: 'A clean and minimalist brand identity designed for a tech startup focusing on simplicity and user experience.'
+      },
+      {
+        id: '2',
+        title: 'Creative Branding',
+        imageUrl: 'https://space.coze.cn/api/coze_space/gen_image?image_size=landscape_16_9&prompt=Creative%20branding%20project%2C%20vibrant%20colors%2C%20geometric%20patterns%2C%20studio%20lighting&sign=3328cbaaf14cda70572784ded723f06f',
+        category: 'Branding',
+        description: 'Vibrant branding project for a creative agency that wanted to stand out in the crowded market.'
+      },
+      {
+        id: '3',
+        title: 'Typography Design',
+        imageUrl: 'https://space.coze.cn/api/coze_space/gen_image?image_size=landscape_16_9&prompt=Elegant%20typography%20design%2C%20black%20and%20white%2C%20high%20contrast%2C%20professional%20photography&sign=44137159beb21d719c00e38f41350082',
+        category: 'Typography',
+        description: 'Custom typography created for a luxury fashion brand to establish a unique visual identity.'
+      }
+    ];
+    
+    // Social links
+    const socialLinks = [
+      { platform: 'Behance', icon: 'fa-brands fa-behance', url: 'https://www.behance.net/' },
+      { platform: 'Dribbble', icon: 'fa-brands fa-dribbble', url: 'https://dribbble.com/' },
+      { platform: 'Instagram', icon: 'fa-brands fa-instagram', url: 'https://www.instagram.com/' },
+      { platform: 'LinkedIn', icon: 'fa-brands fa-linkedin-in', url: 'https://www.linkedin.com/' }
+    ];
+    
+    // Initialize carousel
+    let currentIndex = 0;
+    const carousel = document.getElementById('workCarousel');
+    
+    works.slice(0, 3).forEach((work, index) => {
+      const item = document.createElement('div');
+      item.className = `absolute inset-0 flex items-center justify-center ${index === 0 ? 'opacity-100 z-10' : 'opacity-0'}`;
+      item.id = `carouselItem-${index}`;
+      
+      item.innerHTML = `
+        <img src="${work.imageUrl}" alt="${work.title}" class="h-full w-full object-cover">
+        <div class="absolute bottom-20 left-1/2 -translate-x-1/2 transform text-center">
+          <h2 class="font-abril text-5xl text-primary">${work.title}</h2>
+          <p class="mt-2 text-xl text-primary">${work.category}</p>
+        </div>
+      `;
+      
+      carousel.appendChild(item);
+    });
+    
+    // Carousel navigation
+    function goToNext() {
+      document.getElementById(`carouselItem-${currentIndex}`).classList.remove('opacity-100', 'z-10');
+      currentIndex = (currentIndex + 1) % 3;
+      document.getElementById(`carouselItem-${currentIndex}`).classList.add('opacity-100', 'z-10');
+    }
+    
+    function goToPrev() {
+      document.getElementById(`carouselItem-${currentIndex}`).classList.remove('opacity-100', 'z-10');
+      currentIndex = (currentIndex - 1 + 3) % 3;
+      document.getElementById(`carouselItem-${currentIndex}`).classList.add('opacity-100', 'z-10');
+    }
+    
+    // Auto-rotate carousel
+    let carouselInterval = setInterval(goToNext, 5000);
+    
+    carousel.addEventListener('mouseenter', () => clearInterval(carouselInterval));
+    carousel.addEventListener('mouseleave', () => carouselInterval = setInterval(goToNext, 5000));
+    
+    // Initialize featured works
+    const featuredWorks = document.getElementById('featuredWorks');
+    
+    works.slice(0, 3).forEach(work => {
+      const item = document.createElement('div');
+      item.className = 'group relative overflow-hidden rounded-xl transition-all hover:scale-105';
+      
+      item.innerHTML = `
+        <img src="${work.imageUrl}" alt="${work.title}" class="h-[400px] w-full object-cover">
+        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/80 p-6 opacity-0 transition-all duration-300 group-hover:opacity-100">
+          <h3 class="font-abril text-2xl text-primary">${work.title}</h3>
+          <p class="mt-4 text-center text-primary">${work.description}</p>
+        </div>
+      `;
+      
+      featuredWorks.appendChild(item);
+    });
+    
+    // Initialize all works
+    const allWorks = document.getElementById('allWorks');
+    
+    works.forEach(work => {
+      const item = document.createElement('div');
+      item.className = 'group cursor-pointer overflow-hidden rounded-xl transition-all hover:scale-102';
+      
+      item.innerHTML = `
+        <img src="${work.imageUrl}" alt="${work.title}" class="h-[300px] w-full object-cover transition-all group-hover:brightness-90">
+        <div class="p-4">
+          <h3 class="text-xl text-primary">${work.title}</h3>
+          <p class="text-primary/70">${work.category}</p>
+        </div>
+      `;
+      
+      allWorks.appendChild(item);
+    });
+    
+    // Contact section toggle
+    const contactButton = document.getElementById('contactButton');
+    const contactSection = document.getElementById('contactSection');
+    
+    contactButton.addEventListener('click', () => {
+      contactSection.classList.toggle('hidden');
+      contactSection.style.transform = contactSection.classList.contains('hidden') ? 'translateY(100%)' : 'translateY(0)';
+    });
+    
+    // Initialize contact section
+    const contactContent = document.createElement('div');
+    contactContent.innerHTML = `
+      <div class="flex justify-between items-center mb-12">
+        <h2 class="font-abril text-3xl text-primary">Get In Touch</h2>
+        <button class="text-2xl text-primary" id="closeContact">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
+        <div>
+          <h3 class="mb-6 text-xl text-primary">Connect with me</h3>
+          <div class="flex gap-4">
+            ${socialLinks.map(link => `
+              <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="group relative inline-block rounded-full bg-accent p-4 text-white transition-all hover:scale-110">
+                <i class="${link.icon} text-xl"></i>
+                <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 transform whitespace-nowrap text-xs text-primary opacity-0 transition-all group-hover:opacity-100">
+                  ${link.platform}
+                </span>
+              </a>
+            `).join('')}
+          </div>
+          
+          <div class="mt-12 space-y-6">
+            <div>
+              <h3 class="mb-4 text-xl text-primary">Email me</h3>
+              <a href="mailto:contact@designer.com" class="group relative inline-block text-xl text-accent">
+                contact@designer.com
+                <span class="absolute bottom-0 left-0 h-0.5 w-0 bg-accent transition-all group-hover:w-full"></span>
+              </a>
+            </div>
+            
+            <div>
+              <h3 class="mb-4 text-xl text-primary">Call me</h3>
+              <a href="tel:+1234567890" class="group relative inline-block text-xl text-accent">
+                +1 (234) 567-890
+                <span class="absolute bottom-0 left-0 h-0.5 w-0 bg-accent transition-all group-hover:w-full"></span>
+              </a>
+            </div>
+            
+            <div>
+              <h3 class="mb-4 text-xl text-primary">Visit me</h3>
+              <p class="text-primary">123 Design Street<br>Creative City, CA 90210</p>
+            </div>
+          </div>
+        </div>
+        
+        <form class="space-y-6" id="contactForm">
+          <div>
+            <label for="name" class="mb-2 block text-primary">Name</label>
+            <input id="name" type="text" class="w-full rounded-lg bg-secondary p-4 text-primary" required>
+          </div>
+          
+          <div>
+            <label for="email" class="mb-2 block text-primary">Email</label>
+            <input id="email" type="email" class="w-full rounded-lg bg-secondary p-4 text-primary" required>
+          </div>
+          
+          <div>
+            <label for="message" class="mb-2 block text-primary">Message</label>
+            <textarea id="message" rows="5" class="w-full rounded-lg bg-secondary p-4 text-primary" required></textarea>
+          </div>
+          
+          <button type="submit" class="w-full rounded-lg bg-accent py-4 px-6 text-lg font-medium text-white transition-all hover:bg-[#5a4bd1]">
+            Send Message
+          </button>
+        </form>
+      </div>
+    `;
+    
+    contactSection.appendChild(contactContent);
+    
+    // Close contact section
+    document.getElementById('closeContact').addEventListener('click', () => {
+      contactSection.classList.add('hidden');
+    });
+    
+    // Handle contact form
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Message sent successfully!');
+      contactSection.classList.add('hidden');
+      document.getElementById('contactForm').reset();
+    });
+  </script>
+</body>
+</html>
